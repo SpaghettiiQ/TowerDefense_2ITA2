@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,11 +9,20 @@ public class Spawner : MonoBehaviour
     List<GameObject> enemyPrefabs;
 
     [SerializeField]
-    private float speedInterval;
+    private float speedInterval, maxWaitTime, betweenWaves;
+
+
+
+
+    private int wave;
+
+
 
     // Start is called before the first frame update
     void Start()
     {
+        wave = 1;
+        maxWaitTime = maxWaitTime - speedInterval;
         StartCoroutine(SpawnEnemyRoutine());
     }
 
@@ -20,14 +30,36 @@ public class Spawner : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(speedInterval);
-            SpawnEnemy();
+            System.Random rand = new System.Random(); // random kterej asi nepouzivam idk
+            
+            if(wave % 5 == 0){ // kazdou 5 wave spawni bose dikyyy
+                for(int i = 0; i < wave % 5; i++){ // co 5 wave to o jednoho bose vic
+                    SpawnBoss();
+                }
+                Debug.Log("Spawnovani Boseeee");
+            }
+            else{
+                for(int i = 0; i < (int)(Math.Pow(wave,1.3)); i++){ // wave^1.3 enemaku
+                    yield return new WaitForSeconds(speedInterval + rand.Next(0,(int)(maxWaitTime)));
+                    SpawnEnemy();
+                }
+                
+            }
+            Debug.Log(wave);
+            wave += 1;
+            yield return new WaitForSeconds(betweenWaves); // Grace period mezi wavekama
+
         }
+    }
+
+    private void SpawnBoss(){
+        GameObject Prefab = enemyPrefabs[enemyPrefabs.Count-1]; // Boss Index musi byt posledni
+        Instantiate(Prefab, transform.position, Quaternion.identity);
     }
 
     private void SpawnEnemy()
     {
-        GameObject randomPrefab = enemyPrefabs[Random.Range(0, enemyPrefabs.Count)];
+        GameObject randomPrefab = enemyPrefabs[UnityEngine.Random.Range(0, enemyPrefabs.Count-1)]; // bez boss indexu
         Instantiate(randomPrefab, transform.position, Quaternion.identity);
     }
 }
