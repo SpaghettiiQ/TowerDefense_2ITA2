@@ -104,7 +104,11 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.burst": {
+<<<<<<< Updated upstream
       "version": "1.8.9",
+=======
+      "version": "1.8.10",
+>>>>>>> Stashed changes
       "depth": 1,
       "source": "registry",
       "dependencies": {
@@ -152,7 +156,11 @@
       }
     },
     "com.unity.ide.rider": {
+<<<<<<< Updated upstream
       "version": "3.0.25",
+=======
+      "version": "3.0.26",
+>>>>>>> Stashed changes
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -161,7 +169,11 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.ide.visualstudio": {
+<<<<<<< Updated upstream
       "version": "2.0.21",
+=======
+      "version": "2.0.22",
+>>>>>>> Stashed changes
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -202,7 +214,20 @@
         "com.unity.mathematics": "1.2.1",
         "com.unity.burst": "1.8.9",
         "com.unity.render-pipelines.core": "14.0.9",
+<<<<<<< Updated upstream
         "com.unity.shadergraph": "14.0.9"
+=======
+        "com.unity.shadergraph": "14.0.9",
+        "com.unity.render-pipelines.universal-config": "14.0.9"
+      }
+    },
+    "com.unity.render-pipelines.universal-config": {
+      "version": "14.0.9",
+      "depth": 1,
+      "source": "builtin",
+      "dependencies": {
+        "com.unity.render-pipelines.core": "14.0.9"
+>>>>>>> Stashed changes
       }
     },
     "com.unity.searcher": {
