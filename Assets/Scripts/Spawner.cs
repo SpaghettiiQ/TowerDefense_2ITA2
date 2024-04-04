@@ -33,9 +33,7 @@ public class Spawner : MonoBehaviour
             System.Random rand = new System.Random(); // random kterej asi nepouzivam idk
             
             if(wave % 5 == 0){ // kazdou 5 wave spawni bose dikyyy
-                for(int i = 0; i < wave % 5; i++){ // co 5 wave to o jednoho bose vic
-                    SpawnBoss();
-                }
+                SpawnBoss();
                 Debug.Log("Spawnovani Boseeee");
             }
             else{
@@ -55,6 +53,7 @@ public class Spawner : MonoBehaviour
     private void SpawnBoss(){
         GameObject Prefab = enemyPrefabs[enemyPrefabs.Count-1]; // Boss Index musi byt posledni
         Instantiate(Prefab, transform.position, Quaternion.identity);
+        Debug.Log(Prefab);
     }
 
     private void SpawnEnemy()
