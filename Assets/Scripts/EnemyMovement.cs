@@ -13,14 +13,29 @@ public class EnemyMovement : MonoBehaviour
     {
         animator = GetComponentInChildren<Animator>();
         currentWaypoint = WaypointProvider.Instance.GetNextWaypoint();
+
+        StartCoroutine(AttackCoroutine());
+    }
+
+    IEnumerator AttackCoroutine()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(Random.Range(1f, 2f));
+
+            animator.SetBool("Attack", true);
+
+            yield return new WaitForSeconds(1f);
+
+        }
     }
 
     void Update()
     {
         var direction = currentWaypoint.position - transform.position;
         var movement = direction.normalized * speed * Time.deltaTime;
-        
-        if(movement.x < 0)
+
+        if (movement.x < 0)
         {
             transform.localScale = new Vector3(-1, 1, 1);
         } else
@@ -28,15 +43,16 @@ public class EnemyMovement : MonoBehaviour
             transform.localScale = new Vector3(1, 1, 1);
         }
 
-        animator.SetInteger("State", 2);
         transform.Translate(movement);
+
+        animator.SetInteger("State", 2);
 
         if(Vector3.Distance(currentWaypoint.position, transform.position) < 0.01f)
         {
             currentWaypoint = WaypointProvider.Instance.GetNextWaypoint(currentWaypoint);
             if(currentWaypoint == null)
             {
-                // TODO - odebrat hráèi HP?
+                // TODO - odebrat hrï¿½ï¿½i HP?
                 Destroy(gameObject);
             }
         }
